@@ -1,0 +1,197 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f7f5 0%, #f3f7ff 60%, #ffffff 100%);
+  color: #1c2a39;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.app-shell__sidenav {
+  background: #f5f9f4;
+  border-right: 1px solid rgba(28, 42, 57, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  gap: 2rem;
+}
+
+.sidenav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: #1c7f3c;
+}
+
+.brand__icon {
+  width: 32px;
+  height: 32px;
+  color: #1c7f3c;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.brand__text--accent {
+  color: #1c2a39;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.sidenav__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidenav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  color: #1c2a39;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidenav__link .material-symbols-outlined {
+  font-size: 20px;
+  color: inherit;
+}
+
+.sidenav__link:hover {
+  background: rgba(28, 127, 60, 0.1);
+  color: #1c7f3c;
+}
+
+.sidenav__link.is-active {
+  background: #1c7f3c;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(28, 127, 60, 0.25);
+}
+
+.app-shell__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(28, 42, 57, 0.08);
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.app-header__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1c2a39;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-button {
+  border: none;
+  background: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #4f5a68;
+  box-shadow: 0 2px 8px rgba(28, 42, 57, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(28, 42, 57, 0.16);
+  color: #1c7f3c;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 500,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.profile-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.55rem 0.35rem 0.45rem;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(28, 42, 57, 0.08);
+  color: #1c2a39;
+  font-weight: 600;
+}
+
+.profile-chip__initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #1c7f3c, #3b873e);
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.app-main {
+  flex: 1;
+  overflow: auto;
+}
+
+@media (max-width: 1024px) {
+  .app-shell {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .app-shell__sidenav {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+
+  .sidenav__nav {
+    flex-direction: row;
+  }
+
+  .app-shell__content {
+    min-height: calc(100vh - 96px);
+  }
+}

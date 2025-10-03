@@ -1,0 +1,50 @@
+<div class="app-shell">
+  <aside class="app-shell__sidenav">
+    <div class="sidenav__brand">
+      <svg class="brand__icon" viewBox="0 0 32 32" aria-hidden="true">
+        <path
+          d="M4 16L16 4v6h12v16H16v6L4 16Z"
+          fill="currentColor"
+        />
+      </svg>
+      <span class="brand__text">
+        Green Accelerator
+        <span class="brand__text--accent">Platform</span>
+      </span>
+    </div>
+    <nav class="sidenav__nav">
+      <a
+        *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="sidenav__link"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="app-shell__content">
+    <header class="app-header">
+      <div class="app-header__title">Generate Blueprint</div>
+      <div class="app-header__actions">
+        <button type="button" class="icon-button" aria-label="Notifications">
+          <span class="material-symbols-outlined" aria-hidden="true">notifications</span>
+        </button>
+        <button type="button" class="icon-button" aria-label="Help">
+          <span class="material-symbols-outlined" aria-hidden="true">help</span>
+        </button>
+        <div class="profile-chip" aria-label="Account menu">
+          <span class="profile-chip__initials">JS</span>
+          <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
