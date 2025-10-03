@@ -1,0 +1,154 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 2rem 2.5rem 3rem;
+}
+
+.landing__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 680px;
+}
+
+.landing__subtitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3b873e;
+}
+
+.landing__title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  color: #1c2a39;
+  margin: 0;
+}
+
+.landing__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4f5a68;
+  margin: 0;
+}
+
+.landing__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.solution-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(28, 42, 57, 0.08);
+  border: 1px solid rgba(28, 42, 57, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(28, 42, 57, 0.16);
+}
+
+.solution-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(59, 135, 62, 0.12);
+  position: relative;
+}
+
+.solution-card__icon::before {
+  content: '';
+  width: 28px;
+  height: 28px;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background: currentColor;
+}
+
+.solution-card__icon[data-icon='collab-ai'] {
+  color: #1c91f0;
+  background: rgba(28, 145, 240, 0.12);
+}
+
+.solution-card__icon[data-icon='comply-sync'] {
+  color: #3b873e;
+  background: rgba(59, 135, 62, 0.12);
+}
+
+.solution-card__icon[data-icon='hephaestus'] {
+  color: #ea6b1f;
+  background: rgba(234, 107, 31, 0.12);
+}
+
+.solution-card__icon[data-icon='agados'] {
+  color: #6e6bce;
+  background: rgba(110, 107, 206, 0.12);
+}
+
+.solution-card__icon[data-icon='collab-ai']::before {
+  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3v18"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M6.5 6.5l11 11"/%3E%3Cpath d="M6.5 17.5l11-11"/%3E%3C/svg%3E');
+}
+
+.solution-card__icon[data-icon='comply-sync']::before {
+  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3.5 5.5L9 11l4-4 7.5 7.5"/%3E%3Cpath d="M20.5 13.5V19H5"/%3E%3C/svg%3E');
+}
+
+.solution-card__icon[data-icon='hephaestus']::before {
+  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 2l2.09 6.26L20 9l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.64 4 9l5.91-.74L12 2z"/%3E%3C/svg%3E');
+}
+
+.solution-card__icon[data-icon='agados']::before {
+  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3a9 9 0 1 0 9 9"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M12 3v18"/%3E%3C/svg%3E');
+}
+
+.solution-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1c2a39;
+  margin: 0;
+}
+
+.solution-card__description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4f5a68;
+  margin: 0;
+}
+
+.accent-blue {
+  border-top: 4px solid rgba(28, 145, 240, 0.2);
+}
+
+.accent-green {
+  border-top: 4px solid rgba(59, 135, 62, 0.2);
+}
+
+.accent-orange {
+  border-top: 4px solid rgba(234, 107, 31, 0.2);
+}
+
+.accent-purple {
+  border-top: 4px solid rgba(110, 107, 206, 0.2);
+}
+
+@media (max-width: 768px) {
+  .landing {
+    padding: 1.5rem;
+  }
+
+  .landing__grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}

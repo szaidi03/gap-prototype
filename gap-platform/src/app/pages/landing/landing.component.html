@@ -1,0 +1,21 @@
+<section class="landing">
+  <header class="landing__header">
+    <div class="landing__subtitle">Explore Our Solutions</div>
+    <h1 class="landing__title">Accelerate Your Clean Energy Mission</h1>
+    <p class="landing__description">
+      Discover tools and services designed to help you collaborate, maintain compliance, and deliver clean energy initiatives faster.
+    </p>
+  </header>
+
+  <div class="landing__grid">
+    <article
+      class="solution-card"
+      *ngFor="let solution of solutions"
+      [ngClass]="solution.accentClass"
+    >
+      <div class="solution-card__icon" [attr.data-icon]="solution.icon"></div>
+      <h2 class="solution-card__title">{{ solution.title }}</h2>
+      <p class="solution-card__description">{{ solution.description }}</p>
+    </article>
+  </div>
+</section>
