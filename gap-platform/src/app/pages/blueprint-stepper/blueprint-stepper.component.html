@@ -1,0 +1,153 @@
+<div class="blueprint-stepper" *ngIf="project">
+  <!-- Header with breadcrumb and project info -->
+  <header class="stepper-header">
+    <div class="breadcrumb">
+      <button type="button" class="breadcrumb__link" (click)="onBackToProjects()">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        <span>Back to Projects</span>
+      </button>
+    </div>
+
+    <div class="project-info">
+      <div class="project-info__icon" [attr.data-icon]="project.icon" [ngClass]="project.accentClass"></div>
+      <div class="project-info__content">
+        <div class="stepper-subtitle">Blueprint Configuration</div>
+        <h1 class="stepper-title">{{ project.title }}</h1>
+        <p class="stepper-description">{{ project.description }}</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Stepper -->
+  <div class="progress-stepper">
+    <div class="stepper-progress">
+      <div
+        class="progress-bar"
+        [style.width.%]="((currentStep - 1) / (stepperService.steps.length - 1)) * 100"
+      ></div>
+    </div>
+
+    <div class="stepper-steps">
+      <div
+        *ngFor="let step of stepperService.steps; let i = index"
+        class="step-item"
+        [class.step-item--completed]="getStepStatus(step.id) === 'completed'"
+        [class.step-item--current]="getStepStatus(step.id) === 'current'"
+        [class.step-item--upcoming]="getStepStatus(step.id) === 'upcoming'"
+        [class.step-item--disabled]="getStepStatus(step.id) === 'disabled'"
+        (click)="onStepClick(step.id)"
+        [attr.role]="getStepStatus(step.id) !== 'disabled' ? 'button' : 'presentation'"
+        [attr.tabindex]="getStepStatus(step.id) !== 'disabled' ? '0' : '-1'"
+        [attr.aria-label]="'Step ' + step.id + ': ' + step.title"
+      >
+        <div class="step-indicator">
+          <span
+            *ngIf="getStepStatus(step.id) === 'completed'"
+            class="material-symbols-outlined step-icon"
+            aria-hidden="true"
+          >
+            check
+          </span>
+          <span
+            *ngIf="getStepStatus(step.id) !== 'completed'"
+            class="step-number"
+            aria-hidden="true"
+          >
+            {{ step.id }}
+          </span>
+        </div>
+        <div class="step-content">
+          <div class="step-title">{{ step.title }}</div>
+          <div class="step-description">{{ step.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step Content -->
+  <main class="step-content">
+    <!-- Step 1: Project Overview -->
+    <div *ngIf="currentStep === 1" class="step-panel">
+      <app-step-project-overview></app-step-project-overview>
+    </div>
+
+    <!-- Step 2: App Metadata -->
+    <div *ngIf="currentStep === 2" class="step-panel">
+      <app-step-metadata></app-step-metadata>
+    </div>
+
+    <!-- Step 3: Architecture -->
+    <div *ngIf="currentStep === 3" class="step-panel">
+      <app-step-architecture></app-step-architecture>
+    </div>
+
+    <!-- Step 4: Technology Stack -->
+    <div *ngIf="currentStep === 4" class="step-panel">
+      <app-step-technology-stack></app-step-technology-stack>
+    </div>
+
+    <!-- Step 5: Features & Integrations -->
+    <div *ngIf="currentStep === 5" class="step-panel">
+      <app-step-features></app-step-features>
+    </div>
+
+    <!-- Step 6: Development Tools -->
+    <div *ngIf="currentStep === 6" class="step-panel">
+      <app-step-dev-tools></app-step-dev-tools>
+    </div>
+
+    <!-- Step 7: Review & Generate -->
+    <div *ngIf="currentStep === 7" class="step-panel">
+      <app-step-review></app-step-review>
+    </div>
+  </main>
+
+  <!-- Navigation -->
+  <footer class="stepper-navigation">
+    <button
+      type="button"
+      class="btn btn--secondary"
+      [disabled]="!canGoBack()"
+      (click)="onPreviousStep()"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+      <span>Previous</span>
+    </button>
+
+    <div class="step-indicator-text">
+      Step {{ currentStep }} of {{ stepperService.steps.length }}
+    </div>
+
+    <button
+      type="button"
+      class="btn btn--primary"
+      [disabled]="!canProceedToNext()"
+      (click)="onNextStep()"
+      *ngIf="!isLastStep()"
+    >
+      <span>Next</span>
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn--primary btn--generate"
+      [disabled]="!canProceedToNext()"
+      *ngIf="isLastStep()"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+      <span>Generate Blueprint</span>
+    </button>
+  </footer>
+</div>
+
+<!-- Error state -->
+<div *ngIf="!project" class="stepper-error">
+  <div class="error-content">
+    <h1>Project Not Found</h1>
+    <p>The requested project could not be found.</p>
+    <button type="button" class="btn btn--primary" (click)="onBackToProjects()">
+      <span>Back to Projects</span>
+    </button>
+  </div>
+</div>

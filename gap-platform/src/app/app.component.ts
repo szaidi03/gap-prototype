@@ -19,7 +19,7 @@ export class AppComponent {
   readonly navItems: NavItem[] = [
     {
       label: 'Generate Blueprint',
-      route: '/generate-blueprint',
+      route: '/project-selection',
       icon: 'auto_awesome_motion',
     },
   ];

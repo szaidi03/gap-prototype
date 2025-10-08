@@ -1,0 +1,30 @@
+<section class="project-selection">
+  <header class="project-selection__header">
+    <div class="project-selection__subtitle">Select Your Project</div>
+    <h1 class="project-selection__title">Choose a Project to Generate Blueprint</h1>
+    <p class="project-selection__description">
+      Select one of the following projects to configure and generate a customized blueprint for your implementation.
+    </p>
+  </header>
+
+  <div class="project-selection__grid">
+    <article
+      class="project-card"
+      *ngFor="let project of projects"
+      [ngClass]="project.accentClass"
+      (click)="onProjectSelect(project)"
+      role="button"
+      tabindex="0"
+      (keydown.enter)="onProjectSelect(project)"
+      (keydown.space)="onProjectSelect(project)"
+    >
+      <div class="project-card__icon" [attr.data-icon]="project.icon"></div>
+      <h2 class="project-card__title">{{ project.title }}</h2>
+      <p class="project-card__description">{{ project.description }}</p>
+      <div class="project-card__action">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        <span>Configure Blueprint</span>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,163 @@
+<section class="blueprint-config" *ngIf="project">
+  <header class="blueprint-config__header">
+    <div class="breadcrumb">
+      <button type="button" class="breadcrumb__link" (click)="onBackToProjects()">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        <span>Back to Projects</span>
+      </button>
+    </div>
+
+    <div class="project-info">
+      <div class="project-info__icon" [attr.data-icon]="project.icon" [ngClass]="project.accentClass"></div>
+      <div class="project-info__content">
+        <div class="blueprint-config__subtitle">Configure Blueprint</div>
+        <h1 class="blueprint-config__title">{{ project.title }}</h1>
+        <p class="blueprint-config__description">{{ project.description }}</p>
+      </div>
+    </div>
+  </header>
+
+  <form class="config-form" (ngSubmit)="onGenerateBlueprint()">
+    <div class="config-section">
+      <h2 class="config-section__title">Project Type</h2>
+      <p class="config-section__description">Select the types of applications you want to generate (select at least one):</p>
+
+      <div class="project-types">
+        <label
+          class="project-type-card"
+          *ngFor="let type of projectTypes"
+          [class.is-selected]="isProjectTypeSelected(type.id)"
+        >
+          <input
+            type="checkbox"
+            [checked]="isProjectTypeSelected(type.id)"
+            (change)="onProjectTypeChange(type.id, $any($event.target).checked)"
+            class="project-type-card__input"
+          />
+          <div class="project-type-card__content">
+            <h3 class="project-type-card__title">{{ type.label }}</h3>
+            <p class="project-type-card__description">{{ type.description }}</p>
+          </div>
+          <div class="project-type-card__indicator">
+            <span class="material-symbols-outlined" aria-hidden="true">check</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="config-section">
+      <h2 class="config-section__title">Additional Features</h2>
+      <p class="config-section__description">Choose additional features to include in your blueprint:</p>
+
+      <div class="feature-options">
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeAuth"
+            name="includeAuth"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">Authentication & Authorization</h3>
+            <p class="feature-option__description">Include user authentication, role-based access control, and security features</p>
+          </div>
+        </label>
+
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeDatabase"
+            name="includeDatabase"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">Database Integration</h3>
+            <p class="feature-option__description">Include database models, migrations, and data access layers</p>
+          </div>
+        </label>
+
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeApi"
+            name="includeApi"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">API Documentation</h3>
+            <p class="feature-option__description">Generate API documentation with OpenAPI/Swagger specifications</p>
+          </div>
+        </label>
+
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeDocker"
+            name="includeDocker"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">Docker Configuration</h3>
+            <p class="feature-option__description">Include Dockerfile and docker-compose configuration for containerization</p>
+          </div>
+        </label>
+
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeTesting"
+            name="includeTesting"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">Testing Framework</h3>
+            <p class="feature-option__description">Include unit tests, integration tests, and testing utilities</p>
+          </div>
+        </label>
+
+        <label class="feature-option">
+          <input
+            type="checkbox"
+            [(ngModel)]="config.includeCI"
+            name="includeCI"
+            class="feature-option__input"
+          />
+          <div class="feature-option__content">
+            <h3 class="feature-option__title">CI/CD Pipeline</h3>
+            <p class="feature-option__description">Include GitHub Actions or similar CI/CD configuration</p>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="config-actions">
+      <button
+        type="button"
+        class="btn btn--secondary"
+        (click)="onBackToProjects()"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        <span>Back to Projects</span>
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="!isConfigValid()"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+        <span>Generate Blueprint</span>
+      </button>
+    </div>
+  </form>
+</section>
+
+<section class="blueprint-config__error" *ngIf="!project">
+  <div class="error-content">
+    <h1>Project Not Found</h1>
+    <p>The requested project could not be found.</p>
+    <button type="button" class="btn btn--primary" (click)="onBackToProjects()">
+      <span>Back to Projects</span>
+    </button>
+  </div>
+</section>

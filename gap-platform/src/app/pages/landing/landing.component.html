@@ -1,9 +1,9 @@
 <section class="landing">
   <header class="landing__header">
-    <div class="landing__subtitle">Explore Our Solutions</div>
-    <h1 class="landing__title">Accelerate Your Clean Energy Mission</h1>
+    <div class="landing__subtitle">Green Accelerator Platform</div>
+    <h1 class="landing__title">Suite of AI-Enabled Solutions</h1>
     <p class="landing__description">
-      Discover tools and services designed to help you collaborate, maintain compliance, and deliver clean energy initiatives faster.
+      Discover our comprehensive suite of AI-powered solutions designed to accelerate your mission across security, healthcare, collaboration, grants management, and more.
     </p>
   </header>
 
@@ -11,11 +11,23 @@
     <article
       class="solution-card"
       *ngFor="let solution of solutions"
-      [ngClass]="solution.accentClass"
+      [ngClass]="[
+        solution.accentClass,
+        solution.isClickable ? 'solution-card--clickable' : 'solution-card--coming-soon'
+      ]"
+      (click)="onSolutionClick(solution)"
+      [attr.role]="solution.isClickable ? 'button' : 'presentation'"
+      [attr.tabindex]="solution.isClickable ? '0' : '-1'"
     >
       <div class="solution-card__icon" [attr.data-icon]="solution.icon"></div>
       <h2 class="solution-card__title">{{ solution.title }}</h2>
       <p class="solution-card__description">{{ solution.description }}</p>
+      <div class="solution-card__status" *ngIf="!solution.isClickable">
+        <span class="status-badge">Coming Soon</span>
+      </div>
+      <div class="solution-card__cta" *ngIf="solution.isClickable">
+        <span class="cta-text">Start Building →</span>
+      </div>
     </article>
   </div>
 </section>
