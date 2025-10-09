@@ -2,22 +2,22 @@
 FROM node:18 AS build
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Install Angular CLI and dependencies
 COPY package*.json ./
 RUN npm install -g @angular/cli
 RUN npm install
 
-# Copy the rest of the source code
+# Copy the full source code
 COPY . .
 
-# Build the Angular app (creates /app/dist/<project-name>)
-RUN ng build --configuration production
+# Build the Angular app
+RUN npx ng build gap-platform --configuration production
 
 # ---------- Stage 2: Serve with Nginx ----------
 FROM nginx:alpine
 
-# Copy built Angular files to Nginx's HTML directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy the built output (correct subpath)
+COPY --from=build /app/dist/gap-platform/browser /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
