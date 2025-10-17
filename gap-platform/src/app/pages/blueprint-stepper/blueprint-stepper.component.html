@@ -1,17 +1,19 @@
 <div class="blueprint-stepper" *ngIf="project">
   <!-- Header with breadcrumb and project info -->
   <header class="stepper-header">
-    <div class="breadcrumb">
-      <button type="button" class="breadcrumb__link" (click)="onBackToProjects()">
-        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-        <span>Back to Projects</span>
-      </button>
-    </div>
+    <button
+      type="button"
+      class="back-button"
+      (click)="onBackToProjects()"
+      aria-label="Back to Projects"
+      title="Back to Projects"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+    </button>
 
     <div class="project-info">
       <div class="project-info__icon" [attr.data-icon]="project.icon" [ngClass]="project.accentClass"></div>
       <div class="project-info__content">
-        <div class="stepper-subtitle">Blueprint Configuration</div>
         <h1 class="stepper-title">{{ project.title }}</h1>
         <p class="stepper-description">{{ project.description }}</p>
       </div>
@@ -58,46 +60,30 @@
         </div>
         <div class="step-content">
           <div class="step-title">{{ step.title }}</div>
-          <div class="step-description">{{ step.description }}</div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Step Content -->
-  <main class="step-content">
+  <main class="step-content-container">
     <!-- Step 1: Project Overview -->
     <div *ngIf="currentStep === 1" class="step-panel">
       <app-step-project-overview></app-step-project-overview>
     </div>
 
-    <!-- Step 2: App Metadata -->
+    <!-- Step 2: Technical Configuration (Architecture, Technology Stack, Features, Dev Tools) -->
     <div *ngIf="currentStep === 2" class="step-panel">
-      <app-step-metadata></app-step-metadata>
+      <app-step-technical-config></app-step-technical-config>
     </div>
 
-    <!-- Step 3: Architecture -->
+    <!-- Step 3: CI/CD & Deployment -->
     <div *ngIf="currentStep === 3" class="step-panel">
-      <app-step-architecture></app-step-architecture>
+      <app-step-deployment></app-step-deployment>
     </div>
 
-    <!-- Step 4: Technology Stack -->
+    <!-- Step 4: Review & Generate -->
     <div *ngIf="currentStep === 4" class="step-panel">
-      <app-step-technology-stack></app-step-technology-stack>
-    </div>
-
-    <!-- Step 5: Features & Integrations -->
-    <div *ngIf="currentStep === 5" class="step-panel">
-      <app-step-features></app-step-features>
-    </div>
-
-    <!-- Step 6: Development Tools -->
-    <div *ngIf="currentStep === 6" class="step-panel">
-      <app-step-dev-tools></app-step-dev-tools>
-    </div>
-
-    <!-- Step 7: Review & Generate -->
-    <div *ngIf="currentStep === 7" class="step-panel">
       <app-step-review></app-step-review>
     </div>
   </main>

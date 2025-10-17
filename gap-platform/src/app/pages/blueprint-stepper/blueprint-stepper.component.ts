@@ -4,11 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { BlueprintStepperService, ProjectCard } from '../../services/blueprint-stepper.service';
 import { StepProjectOverviewComponent } from './steps/step-project-overview.component';
-import { StepMetadataComponent } from './steps/step-metadata.component';
-import { StepArchitectureComponent } from './steps/step-architecture.component';
-import { StepTechnologyStackComponent } from './steps/step-technology-stack.component';
-import { StepFeaturesComponent } from './steps/step-features.component';
-import { StepDevToolsComponent } from './steps/step-dev-tools.component';
+import { StepTechnicalConfigComponent } from './steps/step-technical-config.component';
+import { StepDeploymentComponent } from './steps/step-deployment.component';
 import { StepReviewComponent } from './steps/step-review.component';
 
 @Component({
@@ -17,11 +14,8 @@ import { StepReviewComponent } from './steps/step-review.component';
   imports: [
     CommonModule,
     StepProjectOverviewComponent,
-    StepMetadataComponent,
-    StepArchitectureComponent,
-    StepTechnologyStackComponent,
-    StepFeaturesComponent,
-    StepDevToolsComponent,
+    StepTechnicalConfigComponent,
+    StepDeploymentComponent,
     StepReviewComponent
   ],
   templateUrl: './blueprint-stepper.component.html',
@@ -84,7 +78,7 @@ export class BlueprintStepperComponent implements OnInit, OnDestroy {
     const stepParam = this.route.snapshot.paramMap.get('step');
     if (stepParam) {
       const stepNumber = parseInt(stepParam, 10);
-      if (stepNumber >= 1 && stepNumber <= 7) {
+      if (stepNumber >= 1 && stepNumber <= 4) {
         this.stepperService.goToStep(stepNumber);
       }
     }
@@ -146,7 +140,7 @@ export class BlueprintStepperComponent implements OnInit, OnDestroy {
   }
 
   isLastStep(): boolean {
-    return this.currentStep === 7;
+    return this.currentStep === 4;
   }
 
   private updateRoute(): void {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20.9197" height="38.5559" viewBox="0 0 20.9197 38.5559">
+  <defs>
+    <linearGradient id="a" x1="10.6628" y1="0.1193" x2="10.6628" y2="38.4634" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbb137"/>
+      <stop offset="0.2817" stop-color="#fbae36"/>
+      <stop offset="0.5256" stop-color="#f9a335"/>
+      <stop offset="0.7545" stop-color="#f79132"/>
+      <stop offset="0.9385" stop-color="#f57d2e"/>
+    </linearGradient>
+  </defs>
+  <title>hephaestus_logo_header</title>
+  <path d="M4.2979,6.0473A9.5149,9.5149,0,0,0,9.989,12.614c3.7649,1.4009,8.2112,3.2961,9.8487,6.98.5458.9552,4.0937,9.4156-4.0938,14.1917H5.42s-9.2344-4.1328-3.0055-12.1938C2.4148,21.5924-3.3456,14.6851,4.2979,6.0473ZM6.5663.1193s-2.9619,8.08,5.04,11.937C11.6067,12.0563,16.544,5.1107,6.5663.1193ZM6.1339,38.4634l8.3712-.0129a12.347,12.347,0,0,0,3.9283-3.62H2.4892A10.28,10.28,0,0,0,6.1339,38.4634Z" style="fill:url(#a)"/>
+  <path d="M3.5567,27.7568S3.09,31.1814,8.33,31.7522C8.33,31.7522,8.1747,28.0682,3.5567,27.7568Z" style="fill:#fff"/>
+  <path d="M6.6181,19.9218s-2.9576,7.9907,4.8255,11.8823C11.4436,31.8041,16.3211,24.9549,6.6181,19.9218Z" style="fill:#fff"/>
+</svg>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="60 475 662 95">
+<!--Generator: Adobe Illustrator 29.7.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 8)-->
+  <defs>
+    <style>
+      .st0 {
+        fill: #0b1f4b;
+      }
+
+      .st1, .st2 {
+        fill: #fff;
+      }
+
+      .st3 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st4 {
+        fill: url(#radial-gradient);
+      }
+
+      .st5 {
+        fill: url(#radial-gradient1);
+      }
+
+      .st2 {
+        font-family: MyriadPro-Bold, &apos;Myriad Pro&apos;;
+        font-size: 32.7px;
+        font-weight: 700;
+      }
+
+      .st6 {
+        fill: #0f1f48;
+        opacity: .5;
+      }
+
+      .st7 {
+        fill: #c1c2c2;
+      }
+
+      .st8 {
+        fill: #0c1e4c;
+      }
+
+      .st9 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="309.2" cy="243.9" fx="309.2" fy="243.9" r="50.8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ecfefc"/>
+      <stop offset=".2" stop-color="#31ddf7"/>
+      <stop offset=".4" stop-color="#0544e6"/>
+      <stop offset=".7" stop-color="#0a1e51"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient1" cx="465.4" cy="244.6" fx="465.4" fy="244.6" r="44.4" xlink:href="#radial-gradient"/>
+    <linearGradient id="linear-gradient" x1="240.3" y1="183.7" x2="533" y2="183.7" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#939598"/>
+      <stop offset=".5" stop-color="#e6e7e8"/>
+      <stop offset=".9" stop-color="#a7a9ac"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient1" x1="372.5" y1="310.2" x2="400.9" y2="310.2" xlink:href="#linear-gradient"/>
+  </defs>
+  <g>
+    <rect class="st8" x="86.1" y="516.1" width="547.6" height="8.8"/>
+    <polygon class="st8" points="633.6 531.5 627.2 520.1 633.6 508.8 706.3 520.1 633.6 531.5"/>
+  </g>
+  <polygon class="st0" points="151.6 547.6 159.8 547.6 181 499.1 203.2 548.6 211.4 548.6 185.6 491.3 177.4 491.3 151.6 547.6"/>
+  <polygon class="st0" points="235.7 498 235.7 490.3 283.2 490.3 283.2 498 263.6 498 263.6 548.1 255.3 548.1 255.3 498 235.7 498"/>
+  <rect class="st0" x="315.7" y="491.3" width="8.3" height="56.3"/>
+  <rect class="st0" x="357" y="491.3" width="8.3" height="56.3"/>
+  <rect class="st0" x="402.4" y="491.3" width="8.3" height="20.1"/>
+  <rect class="st0" x="402.4" y="523.3" width="8.3" height="24.8"/>
+  <polyline class="st0" points="444.2 541.4 444.2 548.1 402.4 548.1 402.4 541.4"/>
+  <rect class="st0" x="402.4" y="491.3" width="40.8" height="6.7"/>
+  <polygon class="st0" points="478.8 548.1 485.5 548.1 485.5 504.2 522.1 548.1 528.9 548.1 528.9 491.3 521.6 491.3 521.6 537.8 485 490.8 478.3 490.8 478.8 548.1"/>
+  <polygon class="st0" points="562.4 548.1 571.2 548.1 592.9 500.1 615 548.6 623.8 548.6 597 490.8 588.7 490.8 562.4 548.1"/>
+</svg>

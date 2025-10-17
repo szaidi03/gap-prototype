@@ -1,16 +1,29 @@
-<div class="app-shell">
-  <aside class="app-shell__sidenav">
+<div class="app-shell" [class.collapsed]="!sidebarOpen">
+  <aside class="app-shell__sidenav" [class.collapsed]="!sidebarOpen">
     <div class="sidenav__brand">
-      <svg class="brand__icon" viewBox="0 0 32 32" aria-hidden="true">
+      <!-- <svg class="brand__icon" viewBox="0 0 32 32" aria-hidden="true">
         <path
           d="M4 16L16 4v6h12v16H16v6L4 16Z"
           fill="currentColor"
         />
-      </svg>
+      </svg> -->
+      <!-- <button class="sidebar-toggle" aria-label="Open sidebar">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       <span class="brand__text">
-        Green Accelerator
-        <span class="brand__text--accent">Platform</span>
-      </span>
+        MENU -->
+        <!-- <span class="brand__text--accent">Platform</span> -->
+      <!-- </span> -->
+
+      <button class="sidenav__toggle" (click)="sidebarOpen = !sidebarOpen" aria-label="Toggle menu" type="button">
+        <ng-container *ngIf="sidebarOpen">
+          <svg width="28" height="28" viewBox="0 0 28 28"><polyline points="18 6 10 14 18 22" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </ng-container>
+        <ng-container *ngIf="!sidebarOpen">
+          <svg width="28" height="28" viewBox="0 0 28 28"><rect y="6" width="28" height="3" rx="1.5" fill="#333"/><rect y="13" width="28" height="3" rx="1.5" fill="#333"/><rect y="20" width="28" height="3" rx="1.5" fill="#333"/></svg>
+        </ng-container>
+      </button>
+
     </div>
     <nav class="sidenav__nav">
       <a
@@ -20,15 +33,23 @@
         [routerLinkActiveOptions]="{ exact: true }"
         class="sidenav__link"
       >
-        <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
-        <span>{{ item.label }}</span>
+        <span class="sidenav__icon"><img src="{{item.icon}}" width="28" height="28"></span>
+
+        <img *ngIf="item.name!==''" src="{{item.name}}" class="sidenav__name">
+        <p *ngIf="item.name==''" class="sidenav__nametext">{{item.label}}</p>
+        <!-- <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+        <span>{{ item.label }}</span> -->
       </a>
     </nav>
   </aside>
 
   <div class="app-shell__content">
     <header class="app-header">
-      <div class="app-header__title">Generate Blueprint</div>
+      <div class="app-header__title">
+        <a routerLink="" aria-label="Green Accelerator Platform">
+        <img src="assets/gap_logo2.png" alt="gaplogo" height="50"/>
+        </a>
+      </div>
       <div class="app-header__actions">
         <button type="button" class="icon-button" aria-label="Notifications">
           <span class="material-symbols-outlined" aria-hidden="true">notifications</span>

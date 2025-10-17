@@ -1,77 +1,134 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { BlueprintStepperService, ProjectCard } from '../../../services/blueprint-stepper.service';
+import { BlueprintStepperService, ProjectCard, AppMetadata } from '../../../services/blueprint-stepper.service';
 
 @Component({
   selector: 'app-step-project-overview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="step-overview" *ngIf="project">
       <div class="step-header">
         <h2 class="step-title">Project Overview</h2>
         <p class="step-description">
-          Review your selected project details and confirm your choice before proceeding to configuration.
+          Enter essential information about your project.
         </p>
       </div>
 
-      <div class="project-showcase">
-        <div class="project-showcase__visual">
+      <div class="w-full flex">
+        <!-- <div class="project-showcase__left">
           <div class="project-icon" [attr.data-icon]="project.icon" [ngClass]="project.accentClass"></div>
-        </div>
-
-        <div class="project-showcase__content">
-          <h3 class="project-name">{{ project.title }}</h3>
-          <p class="project-description">{{ project.description }}</p>
-
-          <div class="project-features">
-            <h4 class="features-title">What you'll get:</h4>
-            <ul class="features-list">
-              <li class="feature-item" *ngFor="let feature of getProjectFeatures()">
-                <span class="material-symbols-outlined feature-icon" aria-hidden="true">check_circle</span>
-                <span>{{ feature }}</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-technologies">
-            <h4 class="technologies-title">Recommended Technologies:</h4>
-            <div class="tech-badges">
-              <span class="tech-badge" *ngFor="let tech of getRecommendedTechnologies()">
-                {{ tech }}
-              </span>
-            </div>
-          </div>
-
-          <div class="project-actions">
+          <div class="project-basic-info">
+            <h3 class="project-name">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
             <button type="button" class="btn btn--secondary" (click)="changeProject()">
               <span class="material-symbols-outlined" aria-hidden="true">swap_horiz</span>
               <span>Change Project</span>
             </button>
           </div>
-        </div>
-      </div>
+        </div> -->
 
-      <div class="getting-started">
-        <h4 class="getting-started__title">Ready to get started?</h4>
-        <p class="getting-started__description">
-          The next steps will guide you through configuring your {{ project.title }} blueprint with your preferred
-          technologies, features, and deployment options.
-        </p>
+         <div class="project-showcase__right">
+           <form class="metadata-form">
+             <div class="form-section">
+               <h3 class="section-title">Project Information</h3>
+               <div class="form-grid">
+                 <div class="form-field">
+                   <label class="field-label">
+                     Project Name <span class="required">*</span>
+                   </label>
+                   <input
+                     type="text"
+                     [(ngModel)]="metadata.projectName"
+                     name="projectName"
+                     (input)="updateConfiguration()"
+                     class="field-input"
+                     placeholder="Enter your project name"
+                     [class.error]="hasError('projectName')"
+                   />
+                   <div class="field-error" *ngIf="hasError('projectName')">
+                     Project name is required
+                   </div>
+                 </div>
 
-        <div class="next-steps-preview">
-          <div class="next-step-item" *ngFor="let step of upcomingSteps">
-            <div class="step-preview-icon">
-              <span class="material-symbols-outlined" aria-hidden="true">{{ step.icon }}</span>
-            </div>
-            <div class="step-preview-content">
-              <div class="step-preview-title">{{ step.title }}</div>
-              <div class="step-preview-description">{{ step.description }}</div>
-            </div>
-          </div>
-        </div>
+                 <div class="form-field">
+                   <label class="field-label">
+                     Organization <span class="required">*</span>
+                   </label>
+                   <input
+                     type="text"
+                     [(ngModel)]="metadata.organization"
+                     name="organization"
+                     (input)="updateConfiguration()"
+                     class="field-input"
+                     placeholder="Your company or organization name"
+                     [class.error]="hasError('organization')"
+                   />
+                   <div class="field-error" *ngIf="hasError('organization')">
+                     Organization name is required
+                   </div>
+                 </div>
+
+                 <div class="form-field full-width">
+                   <label class="field-label">
+                     Description <span class="required">*</span>
+                   </label>
+                   <textarea
+                     [(ngModel)]="metadata.description"
+                     name="description"
+                     (input)="updateConfiguration()"
+                     class="field-textarea"
+                     placeholder="Describe what your application will do..."
+                     rows="3"
+                     [class.error]="hasError('description')"
+                   ></textarea>
+                   <div class="field-error" *ngIf="hasError('description')">
+                     Project description is required
+                   </div>
+                 </div>
+
+                 <div class="form-field">
+                   <label class="field-label">Domain</label>
+                   <input
+                     type="text"
+                     [(ngModel)]="metadata.domain"
+                     name="domain"
+                     (input)="updateConfiguration()"
+                     class="field-input"
+                     placeholder="e.g., healthcare, finance, e-commerce"
+                   />
+                 </div>
+
+                 <div class="form-field">
+                   <label class="field-label">Business Owner</label>
+                   <input
+                     type="text"
+                     [(ngModel)]="metadata.businessOwner"
+                     name="businessOwner"
+                     (input)="updateConfiguration()"
+                     class="field-input"
+                     placeholder="Name of the business stakeholder"
+                   />
+                 </div>
+
+                 <div class="form-field">
+                   <label class="field-label">Product Owner</label>
+                   <input
+                     type="text"
+                     [(ngModel)]="metadata.productOwner"
+                     name="productOwner"
+                     (input)="updateConfiguration()"
+                     class="field-input"
+                     placeholder="Name of the product owner"
+                   />
+                 </div>
+               </div>
+             </div>
+           </form>
+         </div>
       </div>
     </div>
   `,
@@ -79,12 +136,12 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
     .step-overview {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
     }
 
     .step-header {
       text-align: center;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
@@ -92,7 +149,7 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       font-size: 2rem;
       font-weight: 600;
       color: #1c2a39;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.75rem 0;
     }
 
     .step-description {
@@ -102,9 +159,10 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       margin: 0;
     }
 
+    /* Multi-column Grid Layout */
     .project-showcase {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 320px 1fr;
       gap: 2rem;
       padding: 2rem;
       background: #ffffff;
@@ -113,10 +171,15 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       box-shadow: 0 4px 12px rgba(28, 42, 57, 0.06);
     }
 
-    .project-showcase__visual {
-      display: flex;
-      align-items: flex-start;
-    }
+    // .project-showcase__left {
+    //   display: flex;
+    //   flex-direction: column;
+    //   gap: 1.25rem;
+    //   align-items: center;
+    //   text-align: center;
+    //   border-right: 1px solid rgba(28, 42, 57, 0.08);
+    //   padding-right: 2rem;
+    // }
 
     .project-icon {
       width: 80px;
@@ -124,8 +187,8 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       border-radius: 20px;
       display: grid;
       place-items: center;
-      background: rgba(59, 135, 62, 0.12);
       position: relative;
+      flex-shrink: 0;
     }
 
     .project-icon::before {
@@ -174,79 +237,30 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3a9 9 0 1 0 9 9"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M12 3v18"/%3E%3C/svg%3E');
     }
 
-    .project-showcase__content {
+    .project-basic-info {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .project-name {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: #1c2a39;
       margin: 0;
     }
 
     .project-description {
-      font-size: 1rem;
-      color: #4f5a68;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .features-title,
-    .technologies-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1c2a39;
-      margin: 0 0 0.75rem 0;
-    }
-
-    .features-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
       font-size: 0.875rem;
       color: #4f5a68;
-    }
-
-    .feature-icon {
-      color: #3b873e;
-      font-size: 1.125rem;
-    }
-
-    .tech-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tech-badge {
-      padding: 0.375rem 0.75rem;
-      background: rgba(59, 135, 62, 0.1);
-      color: #3b873e;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    .project-actions {
-      margin-top: auto;
-      padding-top: 0.5rem;
+      line-height: 1.5;
+      margin: 0;
     }
 
     .btn {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       padding: 0.625rem 1.25rem;
       border: none;
@@ -255,6 +269,7 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
+      width: 100%;
     }
 
     .btn--secondary {
@@ -266,85 +281,133 @@ import { BlueprintStepperService, ProjectCard } from '../../../services/blueprin
       background: rgba(28, 42, 57, 0.12);
     }
 
-    .getting-started {
-      background: linear-gradient(135deg, rgba(59, 135, 62, 0.05) 0%, rgba(59, 135, 62, 0.02) 100%);
-      border: 1px solid rgba(59, 135, 62, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
+    /* Form Styling */
+    .project-showcase__right {
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
     }
 
-    .getting-started__title {
+    .metadata-form {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .form-section {
+      background: #ffffff;
+      border: 1px solid rgba(28, 42, 57, 0.08);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .section-title {
       font-size: 1.25rem;
       font-weight: 600;
       color: #1c2a39;
-      margin: 0 0 0.75rem 0;
-      text-align: center;
+      margin: 0 0 1.25rem 0;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid rgba(59, 135, 62, 0.1);
     }
 
-    .getting-started__description {
-      font-size: 1rem;
-      color: #4f5a68;
-      line-height: 1.6;
-      margin: 0 0 2rem 0;
-      text-align: center;
-    }
-
-    .next-steps-preview {
+    .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      row-gap: 1rem;
     }
 
-    .next-step-item {
+    .form-field {
       display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 1rem;
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid rgba(28, 42, 57, 0.06);
+      flex-direction: column;
+      gap: 0.375rem;
     }
 
-    .step-preview-icon {
-      width: 32px;
-      height: 32px;
-      background: rgba(59, 135, 62, 0.1);
-      color: #3b873e;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
+    .form-field.full-width {
+      grid-column: 1 / -1;
     }
 
-    .step-preview-icon .material-symbols-outlined {
-      font-size: 1.125rem;
-    }
-
-    .step-preview-title {
+    .field-label {
       font-size: 0.875rem;
       font-weight: 600;
       color: #1c2a39;
-      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
-    .step-preview-description {
+    .required {
+      color: #e74c3c;
+      font-weight: 500;
+    }
+
+    .field-input,
+    .field-textarea {
+      padding: 0.625rem 0.875rem;
+      border: 2px solid rgba(28, 42, 57, 0.08);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      background: #ffffff;
+      color: #1c2a39;
+      transition: all 0.2s ease;
+      resize: vertical;
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      outline: none;
+      border-color: #3b873e;
+      box-shadow: 0 0 0 3px rgba(59, 135, 62, 0.1);
+    }
+
+    .field-input.error,
+    .field-textarea.error {
+      border-color: #e74c3c;
+    }
+
+    .field-input.error:focus,
+    .field-textarea.error:focus {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+    }
+
+    .field-error {
       font-size: 0.75rem;
-      color: #4f5a68;
-      line-height: 1.4;
+      color: #e74c3c;
+      font-weight: 500;
+      margin-top: 0.125rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .project-showcase {
+        grid-template-columns: 280px 1fr;
+        gap: 1.5rem;
+      }
+
+      .project-showcase__left {
+        padding-right: 1.5rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
       .project-showcase {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        text-align: center;
       }
 
-      .project-showcase__visual {
-        justify-content: center;
+      .project-showcase__left {
+        border-right: none;
+        border-bottom: 1px solid rgba(28, 42, 57, 0.08);
+        padding-right: 0;
+        padding-bottom: 1.5rem;
       }
 
-      .next-steps-preview {
+      .form-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -354,23 +417,16 @@ export class StepProjectOverviewComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   project: ProjectCard | null = null;
 
-  readonly upcomingSteps = [
-    {
-      icon: 'architecture',
-      title: 'Architecture',
-      description: 'Choose application types and patterns'
-    },
-    {
-      icon: 'code',
-      title: 'Technology Stack',
-      description: 'Select frameworks and technologies'
-    },
-    {
-      icon: 'extension',
-      title: 'Features',
-      description: 'Configure features and integrations'
-    }
-  ];
+  metadata: AppMetadata = {
+    projectName: '',
+    description: '',
+    domain: '',
+    organization: '',
+    businessOwner: '',
+    productOwner: ''
+  };
+
+  validationErrors: string[] = [];
 
   constructor(
     private stepperService: BlueprintStepperService,
@@ -382,6 +438,7 @@ export class StepProjectOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(config => {
         this.project = config.project;
+        this.metadata = { ...config.metadata };
       });
   }
 
@@ -390,57 +447,18 @@ export class StepProjectOverviewComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  getProjectFeatures(): string[] {
-    if (!this.project) return [];
-
-    const commonFeatures = [
-      'Complete project structure and scaffolding',
-      'Best practice architecture patterns',
-      'Comprehensive documentation',
-      'Development environment setup'
-    ];
-
-    const projectSpecificFeatures: { [key: string]: string[] } = {
-      'collab-ai': [
-        'AI/ML integration patterns',
-        'Collaborative workspace features',
-        'Enterprise-grade security',
-        'Analytics and insights dashboard'
-      ],
-      'comply-sync': [
-        'Compliance management framework',
-        'FedRAMP baseline configurations',
-        'Automated compliance reporting',
-        'Control mapping utilities'
-      ],
-      'hephaestus': [
-        'Platform service architecture',
-        'Interoperability frameworks',
-        'Scalable microservices design',
-        'API gateway configuration'
-      ],
-      'agados': [
-        'Project management workflows',
-        'Collaboration tools integration',
-        'Clean energy domain models',
-        'Automated project tracking'
-      ]
-    };
-
-    return [...commonFeatures, ...(projectSpecificFeatures[this.project.id] || [])];
+  updateConfiguration(): void {
+    this.stepperService.updateMetadata(this.metadata);
+    this.validateForm();
   }
 
-  getRecommendedTechnologies(): string[] {
-    if (!this.project) return [];
+  private validateForm(): void {
+    const validation = this.stepperService.validateStep(1);
+    this.validationErrors = validation.errors;
+  }
 
-    const recommendedTech: { [key: string]: string[] } = {
-      'collab-ai': ['React', 'Node.js', 'PostgreSQL', 'TensorFlow', 'Docker'],
-      'comply-sync': ['Angular', 'Spring Boot', 'MongoDB', 'OAuth 2.0', 'Kubernetes'],
-      'hephaestus': ['Vue.js', 'Microservices', 'Redis', 'GraphQL', 'AWS'],
-      'agados': ['Next.js', 'Express.js', 'MySQL', 'WebSocket', 'Azure']
-    };
-
-    return recommendedTech[this.project.id] || ['React', 'Node.js', 'PostgreSQL', 'Docker'];
+  hasError(fieldName: string): boolean {
+    return this.validationErrors.some(error => error.toLowerCase().includes(fieldName.toLowerCase()));
   }
 
   changeProject(): void {

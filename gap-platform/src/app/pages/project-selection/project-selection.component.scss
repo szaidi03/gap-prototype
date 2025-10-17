@@ -2,29 +2,40 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding: 2rem 2.5rem 3rem;
+  padding: 0rem 2.5rem 3rem 1rem;
 }
 
 .project-selection__header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.75rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  margin-bottom: -16px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .project-selection__subtitle {
-  font-size: 0.875rem;
+  font-size: clamp(1rem, 2vw, 20px);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #3b873e;
   max-width: 680px;
+  padding-top: 1rem;
+  margin-bottom: -16px;
 }
 
 .project-selection__title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(1rem, 2vw, 20px);
   font-weight: 600;
-  color: #1c2a39;
+  // color: #1c2a39;
+  color: #3b873e;
+  // padding-top: 1rem;s
   margin: 0;
+  // margin-bottom: -16px;
+  margin-left: 8px;
 }
 
 .project-selection__description {
@@ -33,6 +44,77 @@
   color: #4f5a68;
   margin: 0;
   max-width: 680px;
+}
+
+// .add-project {
+//   display: flex;
+//   align-items: center;
+//   position: relative;
+// }
+
+.add-button {
+  display: flex;
+  align-items: center;
+  width: auto;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 18px;
+  border: none;
+  background: rgba(59, 135, 62, 0.08);
+  color: #3b873e;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.25s cubic-bezier(.42,.67,.06,1), box-shadow 0.25s cubic-bezier(.42,.67,.06,1), transform 0.25s cubic-bezier(.42,.67,.06,1), color 0.25s;
+  // flex-shrink: 0;
+  box-shadow: 0 0 0 transparent;
+  // margin-top: 8px;
+  // margin-bottom: -10px;
+  // margin-right: 1rem;
+}
+
+.add-button:hover {
+  background-color: rgba(59, 135, 62, 0.25);
+  // color: #fff;
+  // transform: translateX(-2px);
+  // width: 40px;
+  // height: 40px;
+  box-shadow: 0 2px 16px rgba(59,135,62,0.13);
+  transform: scale(1.06);
+  padding: 0px 5px;
+}
+
+.add-button .material-symbols-outlined {
+  font-size: 1.5rem;
+  transition: font-size 0.3s cubic-bezier(.42,.67,.06,1);
+}
+
+.add-button:hover .material-symbols-outlined {
+  font-size: 1.75rem;
+  margin-right: 2px;
+}
+
+.add-label {
+  max-width: 0;
+  // opacity: 0;
+  visibility: collapse;
+  font-size: 1rem;
+  font-weight: 500;
+  pointer-events: none;
+  color: #3b873e;
+  transition: opacity 0.25s cubic-bezier(.42,.67,.06,1), max-width 0.25s cubic-bezier(.42,.67,.06,1);
+  text-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.add-button:hover .add-label {
+  max-width: 120px;
+  visibility: visible;
+  margin-right: 5px;
+}
+
+.add-button:active {
+  transform: scale(1.03);
+  box-shadow: 0 2px 8px rgba(59, 135, 62, 0.13);
 }
 
 .project-selection__grid {
@@ -44,20 +126,26 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
+  gap: 5px;
+  padding: 0.5rem 0.5rem 0.8rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   border-radius: 20px;
   background: #ffffff;
   box-shadow: 0 10px 30px rgba(28, 42, 57, 0.08);
   border: 1px solid rgba(28, 42, 57, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-height: 121px;
+  transition: all 0.5s ease, padding 0.2s ease;
   cursor: pointer;
   position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(28, 42, 57, 0.16);
+  max-height: 100%;
+  padding-bottom: 15px;
 }
 
 .project-card:focus {
@@ -66,74 +154,118 @@
 }
 
 .project-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
+  width: 100%;
+  height: 50px;
+  display: flex;
   place-items: center;
-  background: rgba(59, 135, 62, 0.12);
-  position: relative;
+  // border-radius: 16px;
+  // display: grid;
+  margin-bottom: 5px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  // place-items: center;
+  // background: rgba(59, 135, 62, 0.12);
+  // position: relative;
 }
 
-.project-card__icon::before {
-  content: '';
-  width: 28px;
-  height: 28px;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  background: currentColor;
+.project-card__name {
+  // display: block;
+  height: 30px;
+  width: 210px;
+  align-self: center;
+  // margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
-.project-card__icon[data-icon='collab-ai'] {
-  color: #1c91f0;
-  background: rgba(28, 145, 240, 0.12);
-}
-
-.project-card__icon[data-icon='comply-sync'] {
-  color: #3b873e;
-  background: rgba(59, 135, 62, 0.12);
-}
-
-.project-card__icon[data-icon='hephaestus'] {
-  color: #ea6b1f;
-  background: rgba(234, 107, 31, 0.12);
-}
-
-.project-card__icon[data-icon='agados'] {
-  color: #6e6bce;
-  background: rgba(110, 107, 206, 0.12);
-}
-
-.project-card__icon[data-icon='collab-ai']::before {
-  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3v18"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M6.5 6.5l11 11"/%3E%3Cpath d="M6.5 17.5l11-11"/%3E%3C/svg%3E');
-}
-
-.project-card__icon[data-icon='comply-sync']::before {
-  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3.5 5.5L9 11l4-4 7.5 7.5"/%3E%3Cpath d="M20.5 13.5V19H5"/%3E%3C/svg%3E');
-}
-
-.project-card__icon[data-icon='hephaestus']::before {
-  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 2l2.09 6.26L20 9l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.64 4 9l5.91-.74L12 2z"/%3E%3C/svg%3E');
-}
-
-.project-card__icon[data-icon='agados']::before {
-  mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3a9 9 0 1 0 9 9"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M12 3v18"/%3E%3C/svg%3E');
-}
-
-.project-card__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1c2a39;
+.project-card__nametext {
+  // display: block;
+  // height: 40px;
+  // width: 230px;
+  align-self: center;
+  font-size: 24px;
   margin: 0;
+  // margin-bottom: 10px;
 }
+
+// .project-card__icon::before {
+//   content: '';
+//   width: 28px;
+//   height: 28px;
+//   mask-size: contain;
+//   mask-repeat: no-repeat;
+//   mask-position: center;
+//   background: currentColor;
+// }
+
+.project-card__icon img {
+  align-self: center;
+  padding: 2px;
+  // object-fit: contain;
+  // display: block;
+}
+
+// .project-card__icon[data-icon='collab-ai'] {
+//   color: #1c91f0;
+//   background: rgba(28, 145, 240, 0.12);
+// }
+
+// .project-card__icon[data-icon='comply-sync'] {
+//   color: #3b873e;
+//   background: rgba(59, 135, 62, 0.12);
+// }
+
+// .project-card__icon[data-icon='hephaestus'] {
+//   color: #ea6b1f;
+//   background: rgba(234, 107, 31, 0.12);
+// }
+
+// .project-card__icon[data-icon='agados'] {
+//   color: #6e6bce;
+//   background: rgba(110, 107, 206, 0.12);
+// }
+
+// .project-card__icon[data-icon='collab-ai']::before {
+//   mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3v18"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M6.5 6.5l11 11"/%3E%3Cpath d="M6.5 17.5l11-11"/%3E%3C/svg%3E');
+// }
+
+// .project-card__icon[data-icon='comply-sync']::before {
+//   mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3.5 5.5L9 11l4-4 7.5 7.5"/%3E%3Cpath d="M20.5 13.5V19H5"/%3E%3C/svg%3E');
+// }
+
+// .project-card__icon[data-icon='hephaestus']::before {
+//   mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 2l2.09 6.26L20 9l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.64 4 9l5.91-.74L12 2z"/%3E%3C/svg%3E');
+// }
+
+// .project-card__icon[data-icon='agados']::before {
+//   mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3a9 9 0 1 0 9 9"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M12 3v18"/%3E%3C/svg%3E');
+// }
+
+// .project-card__title {
+//   font-size: 1.25rem;
+//   font-weight: 600;
+//   color: #1c2a39;
+//   margin: 0;
+// }
 
 .project-card__description {
+  opacity: 0;
+  max-height: 0;
   font-size: 0.95rem;
   line-height: 1.6;
   color: #4f5a68;
-  margin: 0;
-  flex-grow: 1;
+  margin: 1rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  // flex-grow: 1;
+  transition: opacity 0.5s, max-height 0.5s;
+  text-align: left;
+  align-self: center;
+}
+
+.project-card:hover .project-card__description {
+  opacity: 1;
+  max-height: 100%;
 }
 
 .project-card__action {

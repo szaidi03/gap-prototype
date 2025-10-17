@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
 interface ProjectCard {
@@ -7,13 +7,14 @@ interface ProjectCard {
   title: string;
   description: string;
   icon: string;
+  name: string;
   accentClass: string;
 }
 
 @Component({
   selector: 'app-project-selection',
   standalone: true,
-  imports: [NgFor, NgClass],
+  imports: [NgFor, NgClass, NgIf],
   templateUrl: './project-selection.component.html',
   styleUrls: ['./project-selection.component.scss'],
 })
@@ -24,7 +25,8 @@ export class ProjectSelectionComponent {
       title: 'CollabAI',
       description:
         'Application that integrates with CollabWise to produce actionable insights across the enterprise.',
-      icon: 'collab-ai',
+      icon: 'assets/collabai_logo.svg',
+      name: 'assets/collabai_name.svg',
       accentClass: 'accent-blue',
     },
     {
@@ -32,7 +34,8 @@ export class ProjectSelectionComponent {
       title: 'ComplySync ATO',
       description:
         'Accelerating Authority to Operate by connecting controls data to Manage Once! FedRAMP compliant baseline.',
-      icon: 'comply-sync',
+      icon: 'assets/complysync_logo.svg',
+      name: 'assets/complysync_name.svg',
       accentClass: 'accent-green',
     },
     {
@@ -40,7 +43,8 @@ export class ProjectSelectionComponent {
       title: 'Hephaestus',
       description:
         'Application Platform Services with FedRAMP/StateRAMP interoperability resources.',
-      icon: 'hephaestus',
+      icon: 'assets/hephaestus_logo.svg',
+      name: 'assets/hephaestus_name.svg',
       accentClass: 'accent-orange',
     },
     {
@@ -48,7 +52,8 @@ export class ProjectSelectionComponent {
       title: 'Agados',
       description:
         'Provides an integrated suite of collaboration and automation tools to manage Clean Energy projects.',
-      icon: 'agados',
+      icon: 'assets/agados_logo.svg',
+      name: '',
       accentClass: 'accent-purple',
     },
   ];

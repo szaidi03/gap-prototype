@@ -1,10 +1,21 @@
 <section class="project-selection">
   <header class="project-selection__header">
-    <div class="project-selection__subtitle">Select Your Project</div>
-    <h1 class="project-selection__title">Choose a Project to Generate Blueprint</h1>
-    <p class="project-selection__description">
+    <!-- <div class="project-selection__subtitle">Select Your Project</div> -->
+    <h1 class="project-selection__title">
+      Choose a Project to Generate Blueprint
+    </h1>
+    <!-- <p class="project-selection__description">
       Select one of the following projects to configure and generate a customized blueprint for your implementation.
-    </p>
+    </p> -->
+      <button
+        type="button"
+        class="add-button"
+        aria-label="Add Project"
+        title="Add Project"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">add</span>
+        <span class="add-label">Add Project</span>
+      </button>
   </header>
 
   <div class="project-selection__grid">
@@ -18,13 +29,33 @@
       (keydown.enter)="onProjectSelect(project)"
       (keydown.space)="onProjectSelect(project)"
     >
-      <div class="project-card__icon" [attr.data-icon]="project.icon"></div>
-      <h2 class="project-card__title">{{ project.title }}</h2>
+      <!-- <div class="project-card__icon" [attr.data-icon]="project.icon"></div> -->
+      <div class="project-card__icon">
+        <img
+          [src]="project.icon"
+          alt="{{ project.title }}"
+          height="50"
+          width="50"
+        />
+      </div>
+
+      <!-- <h2 class="project-card__title">{{ project.title }}</h2> -->
+      <img
+        *ngIf="project.name !== ''"
+        [src]="project.name"
+        alt="{{ project.title }}"
+        class="project-card__name"
+      />
+      <p *ngIf="project.name == ''" class="project-card__nametext">
+        {{ project.title }}
+      </p>
+
       <p class="project-card__description">{{ project.description }}</p>
-      <div class="project-card__action">
+
+      <!-- <div class="project-card__action">
         <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
         <span>Configure Blueprint</span>
-      </div>
+      </div> -->
     </article>
   </div>
 </section>

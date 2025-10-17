@@ -89,7 +89,7 @@ import { BlueprintStepperService, DeploymentConfig } from '../../../services/blu
     .step-deployment {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
     }
 
     .step-header {

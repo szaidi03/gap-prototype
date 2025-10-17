@@ -8,8 +8,13 @@
 
 .app-shell {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 210px 1fr;
   min-height: 100vh;
+  transition: grid-template-columns 0.3s cubic-bezier(.5,.15,.25,1);
+}
+
+.app-shell.collapsed {
+  grid-template-columns: 70px 1fr;
 }
 
 .app-shell__sidenav {
@@ -17,29 +22,69 @@
   border-right: 1px solid rgba(28, 42, 57, 0.08);
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.5rem;
+  // padding: 1rem 1rem;
   gap: 2rem;
+  transition: width 0.3s cubic-bezier(.5,.15,.25,1), padding 0.3s cubic-bezier(.5,.15,.25,1);
+  z-index: 1;
+  // overflow: hidden;
 }
+
+// .app-shell__sidenav.collapsed {
+//   // background-color: #1c7f3b13;
+//   width: 70px;
+// }
 
 .sidenav__brand {
   display: flex;
   align-items: center;
+  // justify-content: center;
   gap: 0.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1c7f3c;
+  // background-color: #0A7F36;
+  height: 70px;
+  padding: 1rem;
+  // border-bottom: #0A7F36 solid;
+  position: relative;
+  margin-bottom: -2rem;
 }
 
 .brand__icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   color: #1c7f3c;
 }
 
-.brand__text {
+.app-shell__sidenav.collapsed .brand__icon {
+  display: none;
+}
+
+.sidenav__toggle {
   display: flex;
-  flex-direction: column;
-  font-size: 1rem;
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  box-shadow: 0 2px 6px rgba(28, 42, 57, 0.11);
+  // z-index: 20;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.brand__text {
+  // display: none;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  // flex-direction: column;
+  font-size: 1.3rem;
   line-height: 1.2;
+  align-self: center;
+  color: #0A7F36;
 }
 
 .brand__text--accent {
@@ -52,13 +97,23 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  height: 100%;
 }
+
+// .app-shell__sidenav.collapsed .sidenav__nav {
+//   padding: 0;
+// }
 
 .sidenav__link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 0.75rem;
+  // padding: 0.65rem 0.75rem 0.65rem 0rem;
+  padding-left: 2px;
+  // margin-top: -1rem;
+  margin-left: 14px;
+  margin-right: 1rem;
+  height: 40px;
   border-radius: 12px;
   color: #1c2a39;
   text-decoration: none;
@@ -71,15 +126,69 @@
   color: inherit;
 }
 
+.app-shell__sidenav.collapsed .sidenav__link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sidenav__link:hover {
-  background: rgba(28, 127, 60, 0.1);
+  // background: rgba(28, 127, 60, 0.1);
+  background-color: #ffffff;
   color: #1c7f3c;
+  border: 1px solid #0A7F36;
+}
+
+.app-shell__sidenav.collapsed .sidenav__link:hover {
+  width: 180px;
 }
 
 .sidenav__link.is-active {
-  background: #1c7f3c;
-  color: #ffffff;
+  background: #1c7f3b5e;
+  color: #000000;
   box-shadow: 0 8px 18px rgba(28, 127, 60, 0.25);
+  border: #0A7F36 1px solid;
+  padding-left: 0px;
+}
+
+.sidenav__icon {
+  display: flex;
+  padding-left: 5px;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav__name {
+  height: 30px;
+  max-width: 150px;
+  transition: all 0.3s ease;
+}
+
+.sidenav__nametext {
+  // font-size: 30;
+  // max-width: 150px;
+  margin: 0px;
+  margin-left: -8px;
+  flex-wrap: nowrap;
+  transition: all 0.3s;
+}
+
+.app-shell__sidenav.collapsed .sidenav__name {
+  visibility: hidden;
+}
+
+.app-shell__sidenav.collapsed .sidenav__nametext {
+  visibility: hidden;
+}
+
+.app-shell__sidenav.collapsed .sidenav__link:hover .sidenav__name {
+  visibility: visible;
+}
+
+.app-shell__sidenav.collapsed .sidenav__link:hover .sidenav__nametext {
+  visibility: visible;
 }
 
 .app-shell__content {
@@ -92,7 +201,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 1rem 0rem;
   border-bottom: 1px solid rgba(28, 42, 57, 0.08);
   backdrop-filter: blur(14px);
   background: rgba(255, 255, 255, 0.85);
@@ -100,7 +209,7 @@
 
 .app-header__title {
   font-size: 1.25rem;
-  font-weight: 600;
+  // font-weight: 600;
   color: #1c2a39;
 }
 
@@ -108,6 +217,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding-bottom: 0.5rem;
 }
 
 .icon-button {

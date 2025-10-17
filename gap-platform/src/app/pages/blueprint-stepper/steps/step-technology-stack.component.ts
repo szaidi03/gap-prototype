@@ -151,7 +151,7 @@ import { BlueprintStepperService, TechnologyStackConfig, ArchitectureConfig } fr
     .step-technology-stack {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
     }
 
     .step-header {

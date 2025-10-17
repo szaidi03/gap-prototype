@@ -128,13 +128,10 @@ export class BlueprintStepperService {
   configuration$ = this.configurationSubject.asObservable();
 
   readonly steps: StepDefinition[] = [
-    { id: 1, title: 'Project Overview', description: 'Review your selected project', isCompleted: false, isValid: false },
-    { id: 2, title: 'App Metadata', description: 'Enter project details and information', isCompleted: false, isValid: false },
-    { id: 3, title: 'Application Type', description: 'Choose application types to generate', isCompleted: false, isValid: false },
-    { id: 4, title: 'Technology Stack', description: 'Select frameworks and technologies', isCompleted: false, isValid: false },
-    { id: 5, title: 'Features', description: 'Configure features and integrations', isCompleted: false, isValid: false },
-    { id: 6, title: 'Development Tools', description: 'Setup development environment', isCompleted: false, isValid: false },
-    { id: 7, title: 'Review', description: 'Review and generate blueprint', isCompleted: false, isValid: false }
+    { id: 1, title: 'Project Overview', description: 'Review your selected project and enter details', isCompleted: false, isValid: false },
+    { id: 2, title: 'Technical Config', description: 'Configure architecture, stack, features, and dev tools', isCompleted: false, isValid: false },
+    { id: 3, title: 'CI/CD & Deployment', description: 'Configure deployment and DevOps', isCompleted: false, isValid: false },
+    { id: 4, title: 'Review', description: 'Review and generate blueprint', isCompleted: false, isValid: false }
   ];
 
   constructor() {
@@ -199,42 +196,42 @@ export class BlueprintStepperService {
     const config = this.getConfiguration();
     config.metadata = { ...config.metadata, ...metadata };
     this.updateConfiguration(config);
-    this.validateStep(2);
+    this.validateStep(1);
   }
 
   updateArchitecture(architecture: Partial<ArchitectureConfig>): void {
     const config = this.getConfiguration();
     config.architecture = { ...config.architecture, ...architecture };
     this.updateConfiguration(config);
-    this.validateStep(3);
+    this.validateStep(2);
   }
 
   updateTechnologyStack(stack: Partial<TechnologyStackConfig>): void {
     const config = this.getConfiguration();
     config.technologyStack = { ...config.technologyStack, ...stack };
     this.updateConfiguration(config);
-    this.validateStep(4);
+    this.validateStep(2);
   }
 
   updateFeatures(features: Partial<FeaturesConfig>): void {
     const config = this.getConfiguration();
     config.features = { ...config.features, ...features };
     this.updateConfiguration(config);
-    this.validateStep(5);
+    this.validateStep(2);
   }
 
   updateDevTools(devTools: Partial<DevToolsConfig>): void {
     const config = this.getConfiguration();
     config.devTools = { ...config.devTools, ...devTools };
     this.updateConfiguration(config);
-    this.validateStep(6);
+    this.validateStep(2);
   }
 
   updateDeployment(deployment: Partial<DeploymentConfig>): void {
     const config = this.getConfiguration();
     config.deployment = { ...config.deployment, ...deployment };
     this.updateConfiguration(config);
-    this.validateStep(7);
+    this.validateStep(3);
   }
 
   private updateConfiguration(config: BlueprintConfiguration): void {
@@ -287,24 +284,17 @@ export class BlueprintStepperService {
 
     switch (stepNumber) {
       case 1:
-        validation = this.validateProjectOverview(config);
+        // Merged validation for project overview and metadata
+        validation = this.validateProjectOverviewAndMetadata(config);
         break;
       case 2:
-        validation = this.validateMetadata(config);
+        // Combined validation for architecture, technology stack, features, and dev tools
+        validation = this.validateTechnicalConfig(config);
         break;
       case 3:
-        validation = this.validateArchitecture(config);
+        validation = this.validateDeployment(config);
         break;
       case 4:
-        validation = this.validateTechnologyStack(config);
-        break;
-      case 5:
-        validation = this.validateFeatures(config);
-        break;
-      case 6:
-        validation = this.validateDevTools(config);
-        break;
-      case 7:
         validation = this.validateReview(config);
         break;
     }
@@ -319,23 +309,16 @@ export class BlueprintStepperService {
     return validation;
   }
 
-  private validateProjectOverview(config: BlueprintConfiguration): StepValidation {
+  private validateProjectOverviewAndMetadata(config: BlueprintConfiguration): StepValidation {
     const errors: string[] = [];
 
+    // Validate project selection
     if (!config.project) {
       errors.push('Please select a project');
     }
 
-    return {
-      isValid: errors.length === 0,
-      errors
-    };
-  }
-
-  private validateMetadata(config: BlueprintConfiguration): StepValidation {
-    const errors: string[] = [];
+    // Validate metadata
     const { metadata } = config;
-
     if (!metadata.projectName.trim()) {
       errors.push('Please enter a project name');
     }
@@ -347,6 +330,32 @@ export class BlueprintStepperService {
     if (!metadata.organization.trim()) {
       errors.push('Please enter an organization name');
     }
+
+    return {
+      isValid: errors.length === 0,
+      errors
+    };
+  }
+
+  private validateTechnicalConfig(config: BlueprintConfiguration): StepValidation {
+    const errors: string[] = [];
+    const { architecture, technologyStack } = config;
+
+    // Validate architecture
+    if (architecture.projectTypes.length === 0) {
+      errors.push('Please select at least one application type');
+    }
+
+    // Validate technology stack based on selected project types
+    if (architecture.projectTypes.includes('frontend') && !technologyStack.frontend.framework) {
+      errors.push('Please select a frontend framework');
+    }
+
+    if (architecture.projectTypes.includes('backend') && !technologyStack.backend.framework) {
+      errors.push('Please select a backend framework');
+    }
+
+    // Features are optional, so no validation needed for features
 
     return {
       isValid: errors.length === 0,
@@ -391,11 +400,6 @@ export class BlueprintStepperService {
     return { isValid: true, errors: [] };
   }
 
-  private validateDevTools(config: BlueprintConfiguration): StepValidation {
-    // Dev tools are optional, so this step is always valid
-    return { isValid: true, errors: [] };
-  }
-
   private validateDeployment(config: BlueprintConfiguration): StepValidation {
     // Deployment is optional, so this step is always valid
     return { isValid: true, errors: [] };
@@ -403,7 +407,7 @@ export class BlueprintStepperService {
 
   private validateReview(config: BlueprintConfiguration): StepValidation {
     // Review step is valid if all required previous steps are valid
-    const requiredSteps = [1, 2, 3];
+    const requiredSteps = [1, 2];
     const allValid = requiredSteps.every(stepNum => {
       const validation = this.validateStep(stepNum);
       return validation.isValid;

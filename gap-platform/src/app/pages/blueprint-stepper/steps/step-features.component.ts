@@ -78,7 +78,7 @@ import { BlueprintStepperService, FeaturesConfig } from '../../../services/bluep
     .step-features {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
     }
 
     .step-header {

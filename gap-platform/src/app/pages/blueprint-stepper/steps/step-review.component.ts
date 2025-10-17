@@ -15,68 +15,131 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       </div>
 
       <div class="review-sections" *ngIf="config">
-        <!-- Project Info -->
+        <!-- Project Overview -->
         <div class="review-section">
-          <h3 class="section-title">Project Information</h3>
-          <div class="review-card">
-            <div class="project-summary">
-              <div class="project-icon" [attr.data-icon]="config.project?.icon" [ngClass]="config.project?.accentClass"></div>
-              <div>
-                <h4>{{ config.project?.title }}</h4>
-                <p>{{ config.project?.description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Architecture -->
-        <div class="review-section">
-          <h3 class="section-title">Architecture Configuration</h3>
-          <div class="review-card">
-            <div class="config-row">
-              <span class="config-label">Application Types:</span>
-              <div class="config-tags">
-                <span class="config-tag" *ngFor="let type of config.architecture.projectTypes">{{ formatProjectType(type) }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Technology Stack -->
-        <div class="review-section" *ngIf="hasTechnologyStack()">
-          <h3 class="section-title">Technology Stack</h3>
-          <div class="review-card">
-            <div class="tech-stack-grid">
-              <div class="tech-stack-item" *ngIf="config.technologyStack.frontend.framework">
-                <h4>Frontend</h4>
-                <div class="tech-list">
-                  <span class="tech-item">{{ config.technologyStack.frontend.framework }}</span>
-                  <span class="tech-item" *ngIf="config.technologyStack.frontend.uiLibrary">{{ config.technologyStack.frontend.uiLibrary }}</span>
+          <h3 class="section-title">Project Overview</h3>
+          <div class="review-card project-overview-card">
+            <div class="project-metadata">
+              <div class="metadata-grid">
+                <div class="metadata-item" *ngIf="config.metadata.projectName">
+                  <span class="metadata-label">Project Name:</span>
+                  <span class="metadata-value">{{ config.metadata.projectName }}</span>
+                </div>
+                <div class="metadata-item" *ngIf="config.metadata.organization">
+                  <span class="metadata-label">Organization:</span>
+                  <span class="metadata-value">{{ config.metadata.organization }}</span>
+                </div>
+                <div class="metadata-item" *ngIf="config.metadata.domain">
+                  <span class="metadata-label">Domain:</span>
+                  <span class="metadata-value">{{ config.metadata.domain }}</span>
+                </div>
+                <div class="metadata-item" *ngIf="config.metadata.businessOwner">
+                  <span class="metadata-label">Business Owner:</span>
+                  <span class="metadata-value">{{ config.metadata.businessOwner }}</span>
+                </div>
+                <div class="metadata-item" *ngIf="config.metadata.productOwner">
+                  <span class="metadata-label">Product Owner:</span>
+                  <span class="metadata-value">{{ config.metadata.productOwner }}</span>
                 </div>
               </div>
-              <div class="tech-stack-item" *ngIf="config.technologyStack.backend.framework">
-                <h4>Backend</h4>
-                <div class="tech-list">
-                  <span class="tech-item">{{ config.technologyStack.backend.framework }}</span>
-                  <span class="tech-item" *ngIf="config.technologyStack.backend.database">{{ config.technologyStack.backend.database }}</span>
-                </div>
+              <div class="metadata-description" *ngIf="config.metadata.description">
+                <span class="metadata-label">Description:</span>
+                <p class="metadata-value">{{ config.metadata.description }}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Features -->
-        <div class="review-section" *ngIf="hasFeatures()">
-          <h3 class="section-title">Features & Integrations</h3>
-          <div class="review-card">
-            <div class="feature-summary">
-              <div class="feature-item" *ngIf="config.features.authentication.enabled">
-                <span class="material-symbols-outlined">security</span>
-                <span>Authentication ({{ config.features.authentication.methods.length }} methods)</span>
+        <!-- Consolidated Configuration Card with Tabs -->
+        <div class="review-section">
+          <h3 class="section-title">Configuration</h3>
+          <div class="review-card consolidated-config-card">
+            <div class="config-tabs">
+              <button 
+                class="config-tab" 
+                [class.active]="activeConfigTab === 'types'"
+                (click)="activeConfigTab = 'types'"
+              >
+                <span class="material-symbols-outlined">apps</span>
+                <span>Application Types</span>
+              </button>
+              <button 
+                class="config-tab" 
+                [class.active]="activeConfigTab === 'stack'"
+                (click)="activeConfigTab = 'stack'"
+              >
+                <span class="material-symbols-outlined">code</span>
+                <span>Technology Stack</span>
+              </button>
+              <button 
+                class="config-tab" 
+                [class.active]="activeConfigTab === 'features'"
+                (click)="activeConfigTab = 'features'"
+              >
+                <span class="material-symbols-outlined">extension</span>
+                <span>Features</span>
+              </button>
+            </div>
+
+            <div class="config-content">
+              <!-- Application Types Tab -->
+              <div class="tab-panel" *ngIf="activeConfigTab === 'types'">
+                <div class="config-row">
+                  <span class="config-label">Application Types:</span>
+                  <div class="config-tags">
+                    <span class="config-tag" *ngFor="let type of config.architecture.projectTypes">{{ formatProjectType(type) }}</span>
+                  </div>
+                </div>
               </div>
-              <div class="feature-item" *ngIf="config.features.database.enabled">
-                <span class="material-symbols-outlined">database</span>
-                <span>Database Integration</span>
+
+              <!-- Technology Stack Tab -->
+              <div class="tab-panel" *ngIf="activeConfigTab === 'stack'">
+                <div class="tech-stack-grid">
+                  <div class="tech-stack-item" *ngIf="config.technologyStack.frontend.framework">
+                    <h4>Frontend</h4>
+                    <div class="tech-list">
+                      <span class="tech-item">{{ config.technologyStack.frontend.framework }}</span>
+                      <span class="tech-item" *ngIf="config.technologyStack.frontend.uiLibrary">{{ config.technologyStack.frontend.uiLibrary }}</span>
+                      <span class="tech-item" *ngIf="config.technologyStack.frontend.stateManagement">{{ config.technologyStack.frontend.stateManagement }}</span>
+                      <span class="tech-item" *ngIf="config.technologyStack.frontend.styling">{{ config.technologyStack.frontend.styling }}</span>
+                    </div>
+                  </div>
+                  <div class="tech-stack-item" *ngIf="config.technologyStack.backend.framework">
+                    <h4>Backend</h4>
+                    <div class="tech-list">
+                      <span class="tech-item" *ngIf="config.technologyStack.backend.language">{{ config.technologyStack.backend.language }}</span>
+                      <span class="tech-item">{{ config.technologyStack.backend.framework }}</span>
+                      <span class="tech-item" *ngIf="config.technologyStack.backend.database">{{ config.technologyStack.backend.database }}</span>
+                      <span class="tech-item" *ngIf="config.technologyStack.backend.apiStyle">{{ config.technologyStack.backend.apiStyle }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="empty-state" *ngIf="!hasTechnologyStack()">
+                  <span class="material-symbols-outlined">info</span>
+                  <p>No technology stack configured</p>
+                </div>
+              </div>
+
+              <!-- Features Tab -->
+              <div class="tab-panel" *ngIf="activeConfigTab === 'features'">
+                <div class="feature-summary">
+                  <div class="feature-item" *ngIf="config.features.authentication.enabled">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication ({{ config.features.authentication.methods.length }} methods)</span>
+                  </div>
+                  <div class="feature-item" *ngIf="config.features.database.enabled">
+                    <span class="material-symbols-outlined">database</span>
+                    <span>Database Integration</span>
+                  </div>
+                  <div class="feature-item" *ngIf="config.features.integrations.realTime.length > 0">
+                    <span class="material-symbols-outlined">live_tv</span>
+                    <span>Real-time Features ({{ config.features.integrations.realTime.length }})</span>
+                  </div>
+                </div>
+                <div class="empty-state" *ngIf="!hasFeatures()">
+                  <span class="material-symbols-outlined">info</span>
+                  <p>No features configured</p>
+                </div>
               </div>
             </div>
           </div>
@@ -165,7 +228,7 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
     .step-review {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
     }
 
     .step-header {
@@ -214,79 +277,51 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       padding: 1.5rem;
     }
 
-    .project-summary {
+    .project-overview-card {
+      padding: 2rem;
+    }
+
+    .project-metadata {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
     }
 
-    .project-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      flex-shrink: 0;
+    .metadata-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
-    .project-icon::before {
-      content: '';
-      width: 24px;
-      height: 24px;
-      mask-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      background: currentColor;
-    }
-
-    .project-icon[data-icon='collab-ai'] {
-      color: #1c91f0;
-      background: rgba(28, 145, 240, 0.12);
-    }
-
-    .project-icon[data-icon='comply-sync'] {
-      color: #3b873e;
-      background: rgba(59, 135, 62, 0.12);
-    }
-
-    .project-icon[data-icon='hephaestus'] {
-      color: #ea6b1f;
-      background: rgba(234, 107, 31, 0.12);
-    }
-
-    .project-icon[data-icon='agados'] {
-      color: #6e6bce;
-      background: rgba(110, 107, 206, 0.12);
-    }
-
-    .project-icon[data-icon='collab-ai']::before {
-      mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3v18"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M6.5 6.5l11 11"/%3E%3Cpath d="M6.5 17.5l11-11"/%3E%3C/svg%3E');
-    }
-
-    .project-icon[data-icon='comply-sync']::before {
-      mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3.5 5.5L9 11l4-4 7.5 7.5"/%3E%3Cpath d="M20.5 13.5V19H5"/%3E%3C/svg%3E');
-    }
-
-    .project-icon[data-icon='hephaestus']::before {
-      mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 2l2.09 6.26L20 9l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.64 4 9l5.91-.74L12 2z"/%3E%3C/svg%3E');
-    }
-
-    .project-icon[data-icon='agados']::before {
-      mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M12 3a9 9 0 1 0 9 9"/%3E%3Cpath d="M3 12h18"/%3E%3Cpath d="M12 3v18"/%3E%3C/svg%3E');
-    }
-
-    .project-summary h4 {
-      font-size: 1.25rem;
+    .metadata-label {
+      font-size: 0.75rem;
       font-weight: 600;
-      color: #1c2a39;
-      margin: 0 0 0.25rem 0;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .project-summary p {
+    .metadata-value {
       font-size: 0.875rem;
-      color: #4f5a68;
+      color: #1c2a39;
+      font-weight: 500;
+    }
+
+    .metadata-description {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .metadata-description .metadata-value {
       margin: 0;
+      line-height: 1.6;
     }
 
     .config-row {
@@ -353,6 +388,97 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       border-radius: 12px;
       font-size: 0.6875rem;
       font-weight: 500;
+    }
+
+    .consolidated-config-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .config-tabs {
+      display: flex;
+      border-bottom: 2px solid rgba(28, 42, 57, 0.08);
+      background: rgba(28, 42, 57, 0.02);
+    }
+
+    .config-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: #4f5a68;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .config-tab:hover {
+      background: rgba(59, 135, 62, 0.05);
+      color: #1c2a39;
+    }
+
+    .config-tab.active {
+      background: #ffffff;
+      color: #3b873e;
+    }
+
+    .config-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #3b873e;
+    }
+
+    .config-tab .material-symbols-outlined {
+      font-size: 1.25rem;
+    }
+
+    .config-content {
+      padding: 1.5rem;
+    }
+
+    .tab-panel {
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem;
+      color: #6b7280;
+    }
+
+    .empty-state .material-symbols-outlined {
+      font-size: 2rem;
+      color: #9ca3af;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 0.875rem;
     }
 
     .feature-summary,
@@ -474,7 +600,17 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       font-size: 1.25rem;
     }
 
+    @media (max-width: 1024px) {
+      .metadata-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+    }
+
     @media (max-width: 768px) {
+      .metadata-grid {
+        grid-template-columns: 1fr;
+      }
+
       .config-row {
         flex-direction: column;
         align-items: flex-start;
@@ -483,6 +619,23 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
 
       .config-label {
         min-width: unset;
+      }
+
+      .config-tabs {
+        flex-direction: column;
+      }
+
+      .config-tab {
+        justify-content: flex-start;
+        padding: 0.875rem 1.25rem;
+      }
+
+      .config-tab.active::after {
+        left: 0;
+        right: auto;
+        width: 3px;
+        height: 100%;
+        bottom: 0;
       }
 
       .tech-stack-grid,
@@ -495,6 +648,7 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
 export class StepReviewComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   config: BlueprintConfiguration | null = null;
+  activeConfigTab: 'types' | 'stack' | 'features' = 'types';
 
   constructor(private stepperService: BlueprintStepperService) {}
 
