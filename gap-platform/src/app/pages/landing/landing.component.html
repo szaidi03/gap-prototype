@@ -8,29 +8,31 @@
   </header>
 
   <div class="landing__grid">
-    <article
-      class="solution-card"
-      *ngFor="let solution of solutions"
-      [ngClass]="solution.accentClass"
-      (click)="onSolutionClick(solution)"
-      role= 'button'
-      tabindex= '0'
-    >
-      <div class="solution-card__icon">
-        <img [src]="solution.icon" alt="{{ solution.title }}" height="50" width="50"/>
-      </div>
+    <div class="landing__column" *ngFor="let column of columnsOfSolutions">
+      <article
+        class="solution-card"
+        *ngFor="let solution of column"
+        [ngClass]="solution.accentClass"
+        (click)="onSolutionClick(solution)"
+        role= 'button'
+        tabindex= '0'
+      >
+        <div class="solution-card__icon">
+          <img [src]="solution.icon" alt="{{ solution.title }}" height="50" width="50"/>
+        </div>
 
-      <img *ngIf="solution.name!==''" [src]="solution.name" alt="{{ solution.title }}" class="solution-card__name"/>
-      <p *ngIf="solution.name==''" class="solution-card__nametext">{{solution.title}}</p>
+        <img *ngIf="solution.name!==''" [src]="solution.name" alt="{{ solution.title }}" class="solution-card__name"/>
+        <p *ngIf="solution.name==''" class="solution-card__nametext">{{solution.title}}</p>
 
-      <!-- <h2 class="solution-card__title">{{ solution.title }}</h2> -->
-      <p class="solution-card__description">{{ solution.description }}</p>
-      <!-- <div class="solution-card__status" *ngIf="!solution.isClickable">
-        <span class="status-badge">Coming Soon</span>
-      </div>
-      <div class="solution-card__cta" *ngIf="solution.isClickable">
-        <span class="cta-text">Start Building →</span>
-      </div> -->
-    </article>
+        <!-- <h2 class="solution-card__title">{{ solution.title }}</h2> -->
+        <p class="solution-card__description">{{ solution.description }}</p>
+        <!-- <div class="solution-card__status" *ngIf="!solution.isClickable">
+          <span class="status-badge">Coming Soon</span>
+        </div>
+        <div class="solution-card__cta" *ngIf="solution.isClickable">
+          <span class="cta-text">Start Building →</span>
+        </div> -->
+      </article>
+    </div>
   </div>
 </section>

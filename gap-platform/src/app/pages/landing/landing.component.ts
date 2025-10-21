@@ -97,6 +97,16 @@ export class LandingComponent {
 
   constructor(private router: Router) {}
 
+  get columnsOfSolutions(): SolutionCard[][] {
+    // Distribute solutions across 4 columns
+    const columns: SolutionCard[][] = [[], [], [], []];
+    this.solutions.forEach((solution, index) => {
+      const columnIndex = index % 4;
+      columns[columnIndex].push(solution);
+    });
+    return columns;
+  }
+
   onSolutionClick(solution: SolutionCard): void {
     if (solution.isClickable && solution.id === 'phoenix') {
       this.router.navigate(['/project-selection']);
