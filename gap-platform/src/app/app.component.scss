@@ -273,12 +273,12 @@
 
 .app-main {
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
 }
 
 @media (max-width: 1024px) {
   .app-shell {
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 210px 1fr;
   }
 }
 
@@ -287,18 +287,23 @@
     grid-template-columns: 1fr;
   }
 
-  .app-shell__sidenav {
-    position: sticky;
-    top: 0;
-    z-index: 2;
+  // .app-shell__sidenav {
+  //   position: sticky;
+  //   top: 0;
+  //   z-index: 2;
+  //   flex-direction: row;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   padding: 1rem 1.5rem;
+  // }
+
+  .app-shell:not(.collapsed) .sidenav__nav {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
+    max-width: 100%;
   }
 
-  .sidenav__nav {
-    flex-direction: row;
+  .app-shell:not(.collapsed) .sidenav__nametext {
+    padding-right: 5px;
   }
 
   .app-shell__content {

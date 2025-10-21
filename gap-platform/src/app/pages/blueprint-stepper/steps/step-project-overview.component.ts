@@ -11,12 +11,12 @@ import { BlueprintStepperService, ProjectCard, AppMetadata } from '../../../serv
   imports: [CommonModule, FormsModule],
   template: `
     <div class="step-overview" *ngIf="project">
-      <div class="step-header">
+      <!-- <div class="step-header">
         <h2 class="step-title">Project Overview</h2>
         <p class="step-description">
           Enter essential information about your project.
         </p>
-      </div>
+      </div> -->
 
       <div class="w-full flex">
         <!-- <div class="project-showcase__left">
@@ -298,7 +298,7 @@ import { BlueprintStepperService, ProjectCard, AppMetadata } from '../../../serv
       background: #ffffff;
       border: 1px solid rgba(28, 42, 57, 0.08);
       border-radius: 12px;
-      padding: 1.75rem;
+      padding: 0.5rem 1.75rem;
     }
 
     .section-title {

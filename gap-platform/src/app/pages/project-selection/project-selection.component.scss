@@ -301,10 +301,16 @@
 
 @media (max-width: 768px) {
   .project-selection {
-    padding: 1.5rem;
+    padding: 0rem 1rem 1rem;
   }
 
   .project-selection__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    // padding: 1.5rem;
+    padding: 0.5rem 0.5rem 0.8rem;
   }
 }

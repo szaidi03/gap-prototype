@@ -1,14 +1,17 @@
 .blueprint-stepper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
+  // overflow: hidden;
+  // min-height: 100%;
   background: #f8f9fa;
+  flex-grow: 1;
 }
 
 .stepper-header {
   background: #ffffff;
   border-bottom: 1px solid rgba(28, 42, 57, 0.08);
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -274,8 +277,8 @@
 }
 
 .step-content-container {
-  flex-grow: 1;
-  padding: 2.5rem;
+  flex-grow: 0;
+  padding: 0.5rem 2.5rem 1rem;
   background: #ffffff;
 }
 
@@ -287,7 +290,7 @@
 .stepper-navigation {
   background: #ffffff;
   border-top: 1px solid rgba(28, 42, 57, 0.08);
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

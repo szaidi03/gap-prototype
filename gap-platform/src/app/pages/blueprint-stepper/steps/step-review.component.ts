@@ -9,10 +9,10 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
   imports: [CommonModule],
   template: `
     <div class="step-review">
-      <div class="step-header">
+      <!-- <div class="step-header">
         <h2 class="step-title">Review & Generate Blueprint</h2>
         <p class="step-description">Review your configuration and generate your customized blueprint.</p>
-      </div>
+      </div> -->
 
       <div class="review-sections" *ngIf="config">
         <!-- Project Overview -->
@@ -55,24 +55,24 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
           <h3 class="section-title">Configuration</h3>
           <div class="review-card consolidated-config-card">
             <div class="config-tabs">
-              <button 
-                class="config-tab" 
+              <button
+                class="config-tab"
                 [class.active]="activeConfigTab === 'types'"
                 (click)="activeConfigTab = 'types'"
               >
                 <span class="material-symbols-outlined">apps</span>
                 <span>Application Types</span>
               </button>
-              <button 
-                class="config-tab" 
+              <button
+                class="config-tab"
                 [class.active]="activeConfigTab === 'stack'"
                 (click)="activeConfigTab = 'stack'"
               >
                 <span class="material-symbols-outlined">code</span>
                 <span>Technology Stack</span>
               </button>
-              <button 
-                class="config-tab" 
+              <button
+                class="config-tab"
                 [class.active]="activeConfigTab === 'features'"
                 (click)="activeConfigTab = 'features'"
               >
@@ -254,13 +254,13 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
     .review-sections {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
     }
 
     .review-section {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     .section-title {
@@ -274,17 +274,19 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       background: #ffffff;
       border: 1px solid rgba(28, 42, 57, 0.08);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1rem;
+      padding-left: 1.5rem
     }
 
     .project-overview-card {
-      padding: 2rem;
+      padding: 1rem;
+      padding-left: 1.5rem
     }
 
     .project-metadata {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .metadata-grid {
@@ -443,7 +445,8 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
     }
 
     .config-content {
-      padding: 1.5rem;
+      padding: 1rem;
+      padding-left: 1.5rem
     }
 
     .tab-panel {
@@ -529,13 +532,14 @@ import { BlueprintStepperService, BlueprintConfiguration } from '../../../servic
       background: linear-gradient(135deg, rgba(59, 135, 62, 0.05) 0%, rgba(59, 135, 62, 0.02) 100%);
       border: 1px solid rgba(59, 135, 62, 0.1);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     .generation-card {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
+      margin-top: 4px;
     }
 
     .generation-options {

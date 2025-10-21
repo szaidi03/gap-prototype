@@ -23,7 +23,7 @@
 }
 
 .landing__title {
-  font-size: clamp(2rem, 4vw, 40px);
+  font-size: clamp(1.5rem, 4vw, 40px);
   // font-family: time;
   font-weight: 600;
   color: #1c2a39;
@@ -49,9 +49,9 @@
   // grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   // row-gap: 8rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: start;
+  // max-width: 1400px;
+  // margin: 0 auto;
+  // align-items: start;
   // grid-template-rows: masonry;
 }
 
@@ -346,7 +346,7 @@
 
 @media (max-width: 768px) {
   .landing {
-    padding: 1.5rem;
+    padding: 0rem 1rem 1rem;
   }
 
   .landing__grid {
@@ -355,6 +355,7 @@
   }
 
   .solution-card {
-    padding: 1.5rem;
+    // padding: 1.5rem;
+    padding: 0.5rem 0.5rem 0.8rem;
   }
 }

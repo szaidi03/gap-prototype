@@ -24,12 +24,12 @@ interface ProjectType {
   imports: [CommonModule, FormsModule],
   template: `
     <div class="step-technical-config">
-      <div class="step-header">
+      <!-- <div class="step-header">
         <h2 class="step-title">Technical Configuration</h2>
         <p class="step-description">
           Configure your application architecture, technology stack, features, and development tools.
         </p>
-      </div>
+      </div> -->
 
       <!-- Tab Navigation -->
       <div class="tab-navigation">
@@ -446,7 +446,7 @@ interface ProjectType {
     .config-sections {
       display: flex;
       flex-direction: column;
-      min-height: 400px;
+      // min-height: 400px;
     }
 
     .empty-state {
@@ -474,8 +474,8 @@ interface ProjectType {
     .config-section {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      padding: 1.25rem;
+      gap: 1rem;
+      padding: 0.5rem 1.25rem;
       background: #ffffff;
       border: 1px solid rgba(28, 42, 57, 0.08);
       border-radius: 16px;
@@ -485,7 +485,7 @@ interface ProjectType {
       display: flex;
       align-items: flex-start;
       gap: 1rem;
-      padding-bottom: 1rem;
+      padding-bottom: 0.5rem;
       border-bottom: 2px solid rgba(59, 135, 62, 0.1);
     }
 
@@ -526,7 +526,7 @@ interface ProjectType {
     .project-type-card {
       display: flex;
       flex-direction: column;
-      padding: 1.5rem;
+      padding: 1rem;
       border: 2px solid rgba(28, 42, 57, 0.08);
       border-radius: 12px;
       background: #ffffff;
@@ -657,14 +657,14 @@ interface ProjectType {
     .technology-sections {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.5rem;
     }
 
     .tech-subsection {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      padding: 1.5rem;
+      padding: 1rem;
       background: rgba(59, 135, 62, 0.04);
       border: 1px solid rgba(59, 135, 62, 0.12);
       border-radius: 12px;
@@ -720,7 +720,7 @@ interface ProjectType {
       background: rgba(59, 135, 62, 0.04);
       border: 1px solid rgba(59, 135, 62, 0.12);
       border-radius: 12px;
-      padding: 1.25rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.875rem;
@@ -800,7 +800,7 @@ interface ProjectType {
       background: rgba(59, 135, 62, 0.04);
       border: 1px solid rgba(59, 135, 62, 0.12);
       border-radius: 12px;
-      padding: 1.25rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.875rem;

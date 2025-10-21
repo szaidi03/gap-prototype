@@ -10,10 +10,10 @@ import { BlueprintStepperService, DeploymentConfig } from '../../../services/blu
   imports: [CommonModule, FormsModule],
   template: `
     <div class="step-deployment">
-      <div class="step-header">
+      <!-- <div class="step-header">
         <h2 class="step-title">Deployment & DevOps</h2>
         <p class="step-description">Configure deployment strategies, containerization, and DevOps tools.</p>
-      </div>
+      </div> -->
 
       <div class="deployment-grid">
         <div class="deployment-category">
@@ -122,7 +122,7 @@ import { BlueprintStepperService, DeploymentConfig } from '../../../services/blu
       background: #ffffff;
       border: 1px solid rgba(28, 42, 57, 0.08);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
