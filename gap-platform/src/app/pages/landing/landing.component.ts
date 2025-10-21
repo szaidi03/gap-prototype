@@ -109,7 +109,7 @@ export class LandingComponent {
 
   onSolutionClick(solution: SolutionCard): void {
     if (solution.isClickable && solution.id === 'phoenix') {
-      this.router.navigate(['/project-selection']);
+      this.router.navigate(['/phoenix']);
     }
     // For other solutions, show coming soon or do nothing for now
   }

@@ -19,57 +19,51 @@ interface NavItem {
 export class AppComponent {
   sidebarOpen: boolean = true;
   readonly navItems: NavItem[] = [
-    // {
-    //   label: 'Generate Blueprint',
-    //   route: '/project-selection',
-    //   icon: 'auto_awesome_motion',
-    //   name: '',
-    // },
     {
       label: 'ComplySyncATO',
-      route: '/project-selection',
+      route: '/comply-sync',
       icon: 'assets/complysync_logo.svg',
       name: '',
     },
     {
       label: 'Hephaestus',
-      route: '/project-selection',
+      route: '/hephaestus',
       icon: 'assets/hephaestus_logo.svg',
       name: '',
     },
     {
       label: 'CollabAI',
-      route: '/project-selection',
+      route: '/collab-ai',
       icon: 'assets/collabai_logo.svg',
       name: '',
     },
     {
       label: 'GRANTS',
-      route: '/project-selection',
+      route: '/grants',
       icon: 'assets/grants_logo.svg',
       name: '',
     },
     {
       label: 'Debt Mgmt.',
-      route: '/project-selection',
+      route: '/debt',
       icon: 'assets/debt_logo.svg',
       name: '',
     },
     {
       label: 'ATHENA',
-      route: '/project-selection',
+      route: '/athena',
       icon: 'assets/athena_logo.svg',
       name: '',
     },
     {
       label: 'Argus',
-      route: '/project-selection',
+      route: '/argus',
       icon: 'assets/argus_logo.svg',
       name: '',
     },
     {
       label: 'Phoenix',
-      route: '/project-selection',
+      route: '/phoenix',
       icon: 'assets/phoenix_logo.svg',
       name: '',
     },

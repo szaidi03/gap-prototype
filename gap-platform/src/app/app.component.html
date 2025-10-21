@@ -30,7 +30,7 @@
         *ngFor="let item of navItems"
         [routerLink]="item.route"
         routerLinkActive="is-active"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{ exact: false }"
         class="sidenav__link"
       >
         <span class="sidenav__icon"><img src="{{item.icon}}" width="28" height="28"></span>

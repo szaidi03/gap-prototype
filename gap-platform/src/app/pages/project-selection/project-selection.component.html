@@ -19,43 +19,45 @@
   </header>
 
   <div class="project-selection__grid">
-    <article
-      class="project-card"
-      *ngFor="let project of projects"
-      [ngClass]="project.accentClass"
-      (click)="onProjectSelect(project)"
-      role="button"
-      tabindex="0"
-      (keydown.enter)="onProjectSelect(project)"
-      (keydown.space)="onProjectSelect(project)"
-    >
-      <!-- <div class="project-card__icon" [attr.data-icon]="project.icon"></div> -->
-      <div class="project-card__icon">
+    <div class="project-selection__column" *ngFor="let column of columnsOfProjects">
+      <article
+        class="project-card"
+        *ngFor="let project of column"
+        [ngClass]="project.accentClass"
+        (click)="onProjectSelect(project)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="onProjectSelect(project)"
+        (keydown.space)="onProjectSelect(project)"
+      >
+        <!-- <div class="project-card__icon" [attr.data-icon]="project.icon"></div> -->
+        <div class="project-card__icon">
+          <img
+            [src]="project.icon"
+            alt="{{ project.title }}"
+            height="50"
+            width="50"
+          />
+        </div>
+
+        <!-- <h2 class="project-card__title">{{ project.title }}</h2> -->
         <img
-          [src]="project.icon"
+          *ngIf="project.name !== ''"
+          [src]="project.name"
           alt="{{ project.title }}"
-          height="50"
-          width="50"
+          class="project-card__name"
         />
-      </div>
+        <p *ngIf="project.name == ''" class="project-card__nametext">
+          {{ project.title }}
+        </p>
 
-      <!-- <h2 class="project-card__title">{{ project.title }}</h2> -->
-      <img
-        *ngIf="project.name !== ''"
-        [src]="project.name"
-        alt="{{ project.title }}"
-        class="project-card__name"
-      />
-      <p *ngIf="project.name == ''" class="project-card__nametext">
-        {{ project.title }}
-      </p>
+        <p class="project-card__description">{{ project.description }}</p>
 
-      <p class="project-card__description">{{ project.description }}</p>
-
-      <!-- <div class="project-card__action">
-        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-        <span>Configure Blueprint</span>
-      </div> -->
-    </article>
+        <!-- <div class="project-card__action">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          <span>Configure Blueprint</span>
+        </div> -->
+      </article>
+    </div>
   </div>
 </section>

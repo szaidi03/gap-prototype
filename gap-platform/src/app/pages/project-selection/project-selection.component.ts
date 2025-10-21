@@ -60,8 +60,19 @@ export class ProjectSelectionComponent {
 
   constructor(private router: Router) {}
 
+  get columnsOfProjects(): ProjectCard[][] {
+    // Distribute projects across 4 columns
+    const columns: ProjectCard[][] = [[], [], [], []];
+    this.projects.forEach((project, index) => {
+      const columnIndex = index % 4;
+      columns[columnIndex].push(project);
+    });
+    return columns;
+  }
+
   onProjectSelect(project: ProjectCard): void {
-    this.router.navigate(['/blueprint-stepper', project.id, 'step', 1], {
+    // Navigate to project-specific blueprint stepper
+    this.router.navigate([`/${project.id}/blueprint-stepper`, project.id, 'step', 1], {
       state: { project }
     });
   }
